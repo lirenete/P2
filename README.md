@@ -10,7 +10,8 @@ externamente, mediante infinidad de tutoriales, guías y vídeos disponibles gra
 
 Inicialización del repositorio de la práctica.
 ----------------------------------------------
-
+Irene Muñoz i Miquel Escolar
+--- 
 Para cargar los ficheros en su ordenador personal debe seguir los pasos siguientes:
 
 *	Abra una cuenta GitHub para gestionar esta y el resto de prácticas del curso.
