@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     return -2;
   }
 
-  /* Open vad file */
+  /* Open vad file crea la estructura VDATA*/
   if ((vadfile = fopen(output_vad, "wt")) == 0) {
     fprintf(stderr, "Error opening output vad file %s (%s)\n", output_vad, strerror(errno));
     return -1;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
   frame_duration = (float) frame_size/ (float) sf_info.samplerate;
   last_state = ST_UNDEF;
 
-  for (t = last_t = 0; ; t++) { /* For each frame ... */
+  for (t = last_t = 0; ; t++) { /* For each frame ... Bucle principal*/
     /* End loop when file has finished (or there is an error) */
     if  ((n_read = sf_read_float(sndfile_in, buffer, frame_size)) != frame_size) break;
 
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  state = vad_close(vad_data);
+  state = vad_close(vad_data); // es el final de la señal
   /* TODO: what do you want to print, for last frames? */
   if (t != last_t)
     fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));

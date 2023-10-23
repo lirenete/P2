@@ -77,32 +77,32 @@ unsigned int vad_frame_size(VAD_DATA *vad_data) {
  * using a Finite State Automata
  */
 
-VAD_STATE vad(VAD_DATA *vad_data, float *x) {
+VAD_STATE vad(VAD_DATA *vad_data, float *x) { //automata, trama actual
 
   /* 
    * TODO: You can change this, using your own features,
-   * program finite state automaton, define conditions, etc.
+   * program finite state automaton, define conditions, etc. //
    */
 
   Features f = compute_features(x, vad_data->frame_length);
   vad_data->last_feature = f.p; /* save feature, in case you want to show */
 
-  switch (vad_data->state) {
-  case ST_INIT:
+  switch (vad_data->state) { //automata como tal
+  case ST_INIT: //dice q el estado es el silencio
     vad_data->state = ST_SILENCE;
     break;
 
   case ST_SILENCE:
     if (f.p > 0.95)
-      vad_data->state = ST_VOICE;
+      vad_data->state = ST_VOICE; 
     break;
 
-  case ST_VOICE:
-    if (f.p < 0.01)
+  case ST_VOICE: 
+    if (f.p < 0.01) //si la potencia es menor que este valor
       vad_data->state = ST_SILENCE;
     break;
 
-  case ST_UNDEF:
+  case ST_UNDEF: 
     break;
   }
 
