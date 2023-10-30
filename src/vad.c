@@ -4,6 +4,7 @@
 
 #include "pav_analysis.h"
 #include "vad.h"
+#include "pav_analysis.h"
 
 //float vad_data->umbral1; 
 const float FRAME_TIME = 10.0F; /* in ms. */
@@ -44,8 +45,12 @@ Features compute_features(const float *x, int N) {
    * For the moment, compute random value between 0 and 1 
    */
   Features feat;
+<<<<<<< HEAD
   feat.p=compute_power(x,N);
   //feat.zcr = feat.p = feat.am = (float) rand()/RAND_MAX;
+=======
+  feat.p = compute_power(x,N);
+>>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
   return feat;
 }
 
@@ -58,7 +63,11 @@ VAD_DATA * vad_open(float rate, float umbral1) {
   vad_data->state = ST_INIT;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
+<<<<<<< HEAD
   vad_data->umbral1 = umbral1;
+=======
+  vad_data-> umbral1=umbral1;
+>>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
   return vad_data;
 }
 
@@ -88,7 +97,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) { //automata, trama actual
    * program finite state automaton, define conditions, etc. //
    */
 
-  Features f = compute_features(x, vad_data->frame_length);
+  Features f = compute_features(x, vad_data->frame_length); 
   vad_data->last_feature = f.p; /* save feature, in case you want to show */
 
   switch (vad_data->state) { //automata como tal

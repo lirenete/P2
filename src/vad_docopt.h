@@ -37,7 +37,11 @@ const char help_message[] =
 "   -i FILE, --input-wav=FILE   WAVE file for voice activity detection\n"
 "   -o FILE, --output-vad=FILE  Label file with the result of VAD\n"
 "   -w FILE, --output-wav=FILE  WAVE file with silences cleared\n"
+<<<<<<< HEAD
 "   -1 REAL, --umbral1=REAL     Umbral de decision breve silencio (sonoro sordo) [default: -30] \n"
+=======
+"   -1 REAL, --umbral1=REAL     Umbral de decisión breve silencio [default: -30]\n"
+>>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
 "   -v, --verbose  Show debug information\n"
 "   -h, --help     Show this screen\n"
 "   --version      Show the version of the project\n"

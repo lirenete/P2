@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
   output_wav = args.output_wav;
   float umbral1 = atof(args.umbral1);
 
+  float umbral1= atof(args.umbral1);
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
     return -1;
@@ -64,7 +65,11 @@ int main(int argc, char *argv[]) {
     }
   }
 
+<<<<<<< HEAD
   vad_data = vad_open(sf_info.samplerate, umbral1);
+=======
+  vad_data = vad_open(sf_info.samplerate,umbral1); 
+>>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
   buffer       = (float *) malloc(frame_size * sizeof(float));
