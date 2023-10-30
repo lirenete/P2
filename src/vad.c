@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "pav_analysis.h"
 #include "vad.h"
 
+//float vad_data->umbral1; 
 const float FRAME_TIME = 10.0F; /* in ms. */
 
 /* 
@@ -42,7 +44,8 @@ Features compute_features(const float *x, int N) {
    * For the moment, compute random value between 0 and 1 
    */
   Features feat;
-  feat.zcr = feat.p = feat.am = (float) rand()/RAND_MAX;
+  feat.p=compute_power(x,N);
+  //feat.zcr = feat.p = feat.am = (float) rand()/RAND_MAX;
   return feat;
 }
 
@@ -50,11 +53,12 @@ Features compute_features(const float *x, int N) {
  * TODO: Init the values of vad_data
  */
 
-VAD_DATA * vad_open(float rate) {
+VAD_DATA * vad_open(float rate, float umbral1) {
   VAD_DATA *vad_data = malloc(sizeof(VAD_DATA));
   vad_data->state = ST_INIT;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
+  vad_data->umbral1 = umbral1;
   return vad_data;
 }
 
@@ -89,16 +93,17 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) { //automata, trama actual
 
   switch (vad_data->state) { //automata como tal
   case ST_INIT: //dice q el estado es el silencio
+    vad_data->umbral1 = f.p + vad_data->umbral1;
     vad_data->state = ST_SILENCE;
     break;
 
   case ST_SILENCE:
-    if (f.p > 0.95)
+    if (f.p > vad_data->umbral1)
       vad_data->state = ST_VOICE; 
     break;
 
   case ST_VOICE: 
-    if (f.p < 0.01) //si la potencia es menor que este valor
+    if (f.p < vad_data->umbral1) //si la potencia es menor que este valor
       vad_data->state = ST_SILENCE;
     break;
 
