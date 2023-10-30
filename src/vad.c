@@ -91,6 +91,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) { //automata, trama actual
 
   switch (vad_data->state) { //automata como tal
   case ST_INIT: //dice q el estado es el silencio
+    vad_data->umbral1 = f.p +vad_data->umbral1;
     vad_data->state = ST_SILENCE;
     break;
 
