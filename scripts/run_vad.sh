@@ -20,7 +20,7 @@ for filewav in $DB/*/*wav; do
 	    exit 1
     fi
 
-    filevad=${filewav/.wav/.vad}
+    filevad=${filewav/.wav/.vad} #substitucion
 
     $CMD -i $filewav -o $filevad || exit 1
 
@@ -30,6 +30,6 @@ for filewav in $DB/*/*wav; do
 
 done
 
-scripts/vad_evaluation.pl $DB/*/*lab
+scripts/vad_evaluation.pl $DB/*/*lab 
 
 exit 0
