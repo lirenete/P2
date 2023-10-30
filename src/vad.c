@@ -45,12 +45,7 @@ Features compute_features(const float *x, int N) {
    * For the moment, compute random value between 0 and 1 
    */
   Features feat;
-<<<<<<< HEAD
-  feat.p=compute_power(x,N);
-  //feat.zcr = feat.p = feat.am = (float) rand()/RAND_MAX;
-=======
   feat.p = compute_power(x,N);
->>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
   return feat;
 }
 
@@ -63,11 +58,7 @@ VAD_DATA * vad_open(float rate, float umbral1) {
   vad_data->state = ST_INIT;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
-<<<<<<< HEAD
-  vad_data->umbral1 = umbral1;
-=======
-  vad_data-> umbral1=umbral1;
->>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
+  vad_data->umbral1=umbral1;
   return vad_data;
 }
 

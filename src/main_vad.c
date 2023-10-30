@@ -65,11 +65,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-<<<<<<< HEAD
   vad_data = vad_open(sf_info.samplerate, umbral1);
-=======
-  vad_data = vad_open(sf_info.samplerate,umbral1); 
->>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
   buffer       = (float *) malloc(frame_size * sizeof(float));
@@ -92,7 +88,7 @@ int main(int argc, char *argv[]) {
 
     /* TODO: print only SILENCE and VOICE labels */
     /* As it is, it prints UNDEF segments but is should be merge to the proper value */
-    if (state != last_state) {
+    if (state != last_state) { /*si ponemos un estado nuevo hay que ponerlo aqui*/
       if (t != last_t)
         fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration, state2str(last_state));
       last_state = state;
