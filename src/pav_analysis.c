@@ -25,7 +25,6 @@ float compute_zcr(const float *x, unsigned int N, float fm) {
         }
     }
     return (fm/2)*(1/(N-1))*zcr;
-<<<<<<< HEAD
 }
 
 //#include <math.h>
@@ -79,6 +78,3 @@ float compute_zcr(const float *x, unsigned int N, float fm) {
     float fzcr = (((fm/2)/(N-1))*zcr);
     return fzcr;
 }*/
-=======
-}
->>>>>>> 9de866284be5fefef35c9a032193f38bce287c3d

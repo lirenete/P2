@@ -1,12 +1,14 @@
 #!/bin/bash
 
-if [ $# != 1 ]; then
-    echo "usage: $0 umbral1"
-    exit 1
-fi
+# if [ $# != 1 ]; then
+#     exit 1#     echo "usage: $0 umbral1"
 
-#umbral1=$1
-umbral1=${1:-6}
+# fi
+
+
+
+
+#umbral2=${2:-6}
 # Be sure that this file has execution permissions:
 # Use the nautilus explorer or chmod +x run_vad.sh
 
@@ -18,7 +20,8 @@ set -o pipefail
 DIR_P2=$HOME/PAV/P2
 DB=$DIR_P2/db.v4
 #CMD="$DIR_P2/bin/vad -1 $umbral1"
-CMD="$DIR_P2/bin/vad -1 $umbral1"
+#CMD="$DIR_P2/bin/vad -1 $umbral1 -2 $umbral2"
+CMD="$DIR_P2/bin/vad -1 5.1"
 
 for filewav in $DB/*/*wav; do
 #    echo

@@ -136,31 +136,50 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
+![Alt text](image-3.png)
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
+	Al aumentar el nivel de la señal en aproximadamente 10 dB con respecto al nivel de silencio inicial, logramos diferenciar una señal de voz de un periodo de silencio.
+
+
+
 	* Duración mínima razonable de los segmentos de voz y silencio.
+
+	Para identificar segmentos de silencio en la señal, se establece un criterio de duración mínima de 60 ms como Tiempo de Silencio. En contraste, para los segmentos de voz, se requiere una duración mínima de 250 ms, denominada Tiempo de Voz.
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
+	La tasa de cruces por cero en una señal de audio puede indicar si un segmento es de voz o silencio, pero proporciona menos información que la potencia de la señal. Su utilidad radica especialmente en distinguir entre sonidos sordos (mayor número de cruces por cero) y sonoros (menor número de cruces por cero). Aunque no tan informativa como la potencia en términos de presencia de voz, la tasa de cruces por cero es valiosa para discernir características acústicas específicas de los sonidos.
 
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
   tiempo real tan exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
+ 
+	En la versión 1, hemos implementado una estrategia de detección de voz basada en la comparación de la potencia inicial (fp) con el umbral umbral1. La actualización vad_data->umbral1 = f.p + vad_data->umbral1 ajusta dinámicamente este umbral. Si la potencia de la señal se encuentra por encima de este umbral1, se clasifica como un estado de voz. 
+
+En la versión dos, hemos introducido un concepto adicional para mejorar la detección de voz. Se ha implementado un mecanismo que involucra dos estados previos, last state merged y last state, junto con los estados intermedios m_voice y m_silence. Este enfoque se ha diseñado para permitir que, en los estados intermedios, m_voice y m_silence, se pueda determinar si las muestras que ingresan pertenecen a un estado de voz o no.
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
+![Alt text](image-1.png)
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
+	
+	En la gráfica se evidencia una notable similitud entre los resultados generados por nuestro sistema y los impuestos manualmente, con mínimas diferencias en el inicio o final de la voz. Estas diferencias podrían atribuirse a los umbrales establecidos en el programa o a posibles imprecisiones al segmentar manualmente, sugiriendo que el sistema podría detectar con mayor precisión que nosotros mismos.
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
 
+![Alt text](image-2.png)
+
+Podemos ver que los datos son buenos, aunque muy mejorables ya que no hemos podido implementar bien la parte de los estados intermedos.
+Fscore 89.03 con umbral1=5.1
 
 ### Trabajos de ampliación
 
